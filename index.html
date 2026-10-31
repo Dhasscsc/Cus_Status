@@ -65,7 +65,7 @@
 
 <script>
 // StatusCode.gs Deploy செய்த Web App URL-ஐ இங்கே ஒட்டவும்
-const STATUS_URL = 'PASTE_STATUSCODE_GS_URL_HERE';
+const STATUS_URL = 'https://script.google.com/macros/s/AKfycbxWxJYfGmT1b2CRoGQFCJYRel3RTsi0mrwqs3M3dUjOORQJMruxV9VdadIxuJVNNnxibg/exec';
 
 const LABEL = { pending:'⏳ நிலுவையில்', progress:'🔧 செயல்பாட்டில்', done:'✅ முடிந்தது', rejected:'❌ நிராகரிக்கப்பட்டது' };
 
@@ -94,7 +94,7 @@ async function check() {
   const out = document.getElementById('out');
   const btn = document.getElementById('go');
   if (ref.replace(/[\s\-]/g, '').length < 5) { out.innerHTML = '<div class="msg">சரியான குறிப்பு எண்ணை உள்ளிடவும்</div>'; return; }
-  if (STATUS_URL.indexOf('PASTE_') === 0) { out.innerHTML = '<div class="msg">அமைப்பு முடிவடையவில்லை</div>'; return; }
+  if (!STATUS_URL || STATUS_URL.indexOf('PASTE_') === 0) { out.innerHTML = '<div class="msg">அமைப்பு முடிவடையவில்லை</div>'; return; }
   btn.disabled = true; out.innerHTML = '<div class="msg">தேடுகிறது...</div>';
   try {
     const res = await fetch(STATUS_URL + '?action=status&ref=' + encodeURIComponent(ref));
